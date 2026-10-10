@@ -1,0 +1,105 @@
+(node:6009) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+newman
+
+Lab05 Registration API (DEFECTS)
+
+❏ D1 Давхар бүртгэл: нэг оюутан нэг хичээлд 2 удаа бүртгүүлж болохгүй
+↳ Setup: PUT /students/D1_STU
+  PUT http://localhost:3000/students/D1_STU [200 OK, 178B, 43ms]
+  ✓  Setup OK: PUT /students/D1_STU
+
+↳ Setup: PUT /courses/D1_CRS
+  PUT http://localhost:3000/courses/D1_CRS [200 OK, 178B, 4ms]
+  ✓  Setup OK: PUT /courses/D1_CRS
+
+↳ 1-р бүртгэл
+  POST http://localhost:3000/registrations [201 Created, 202B, 3ms]
+  ✓  1-р бүртгэл 201
+
+↳ 2-р бүртгэл (яг ижил)
+  POST http://localhost:3000/registrations [201 Created, 202B, 3ms]
+  1. 2-р бүртгэл 201 БИШ байх ёстой
+
+❏ D2 Үүсгээгүй studentID = "constructor" → ERROR_NO_STUDENT байх ёстой
+↳ Setup: PUT /courses/D2_CRS
+  PUT http://localhost:3000/courses/D2_CRS [200 OK, 178B, 3ms]
+  ✓  Setup OK: PUT /courses/D2_CRS
+
+↳ POST /registrations
+  POST http://localhost:3000/registrations [200 OK, 198B, 3ms]
+  ✓  Статус код 200
+  2. result = ERROR_NO_STUDENT
+
+❏ D3 Үүсгээгүй studentID = "toString" → ERROR_NO_STUDENT байх ёстой
+↳ Setup: PUT /courses/D3_CRS
+  PUT http://localhost:3000/courses/D3_CRS [200 OK, 178B, 3ms]
+  ✓  Setup OK: PUT /courses/D3_CRS
+
+↳ POST /registrations
+  POST http://localhost:3000/registrations [200 OK, 198B, 3ms]
+  ✓  Статус код 200
+  3. result = ERROR_NO_STUDENT
+
+❏ D4 courseID = "toString" үед сервер унах ёсгүй (ERROR_NO_COURSE байх ёстой)
+↳ Setup: PUT /students/D4_STU
+  PUT http://localhost:3000/students/D4_STU [200 OK, 178B, 3ms]
+  ✓  Setup OK: PUT /students/D4_STU
+
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     socket hang up
+  5. Статус код 200
+  6. result = ERROR_NO_COURSE
+
+┌─────────────────────────┬──────────────────┬─────────────────┐
+│                         │         executed │          failed │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│              iterations │                1 │               0 │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│                requests │               10 │               1 │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│            test-scripts │               10 │               0 │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│      prerequest-scripts │                0 │               0 │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│              assertions │               13 │               5 │
+├─────────────────────────┴──────────────────┴─────────────────┤
+│ total run duration: 331ms                                    │
+├──────────────────────────────────────────────────────────────┤
+│ total data received: 213B (approx)                           │
+├──────────────────────────────────────────────────────────────┤
+│ average response time: 7ms [min: 3ms, max: 43ms, s.d.: 12ms] │
+└──────────────────────────────────────────────────────────────┘
+
+  #  failure         detail                                                                                                     
+                                                                                                                                
+ 1.  AssertionError  2-р бүртгэл 201 БИШ байх ёстой                                                                             
+                     expected 201 to not equal 201                                                                              
+                     at assertion:0 in test-script                                                                              
+                     inside "D1 Давхар бүртгэл: нэг оюутан нэг хичээлд 2 удаа бүртгүүлж болохгүй / 2-р бүртгэл (яг ижил)"       
+                                                                                                                                
+ 2.  AssertionError  result = ERROR_NO_STUDENT                                                                                  
+                     expected 'ERROR_INACTIVE_STUDENT' to deeply equal 'ERROR_NO_STUDENT'                                       
+                     at assertion:1 in test-script                                                                              
+                     inside "D2 Үүсгээгүй studentID = "constructor" → ERROR_NO_STUDENT байх ёстой / POST /registrations"        
+                                                                                                                                
+ 3.  AssertionError  result = ERROR_NO_STUDENT                                                                                  
+                     expected 'ERROR_INACTIVE_STUDENT' to deeply equal 'ERROR_NO_STUDENT'                                       
+                     at assertion:1 in test-script                                                                              
+                     inside "D3 Үүсгээгүй studentID = "toString" → ERROR_NO_STUDENT байх ёстой / POST /registrations"           
+                                                                                                                                
+ 4.  Error                                                                                                                      
+                     socket hang up                                                                                             
+                     at request                                                                                                 
+                     inside ""                                                                                                  
+                                                                                                                                
+ 5.  AssertionError  Статус код 200                                                                                             
+                     expected PostmanResponse{ …(5) } to have property 'code'                                                   
+                     at assertion:0 in test-script                                                                              
+                     inside "D4 courseID = "toString" үед сервер унах ёсгүй (ERROR_NO_COURSE байх ёстой) / POST /registrations" 
+                                                                                                                                
+ 6.  JSONError       result = ERROR_NO_COURSE                                                                                   
+                     "undefined" is not valid JSON                                                                              
+                     at assertion:1 in test-script                                                                              
+                     inside "D4 courseID = "toString" үед сервер унах ёсгүй (ERROR_NO_COURSE байх ёстой) / POST /registrations" 
