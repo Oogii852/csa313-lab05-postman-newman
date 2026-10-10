@@ -1,0 +1,1389 @@
+{
+  "info": {
+    "name": "Lab05 Registration API (FAIL)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ],
+  "item": [
+    {
+      "name": "T01 Happy path: идэвхтэй оюутан, урьдач хангасан → 201 OK",
+      "item": [
+        {
+          "name": "Setup: PUT /students/T01_STU",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /students/T01_STU\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/students/T01_STU",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "students",
+                "T01_STU"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\":\"active\",\"coursesTaken\":[\"CS201\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Setup: PUT /courses/T01_CRS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /courses/T01_CRS\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/courses/T01_CRS",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "courses",
+                "T01_CRS"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"prerequisites\":[\"CS201\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"result = OK\", () => pm.expect(pm.response.json().result).to.eql(\"OK\"));",
+                  "pm.test(\"registrationID нь тоо\", () => pm.expect(pm.response.json().registrationID).to.be.a(\"number\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentID\":\"T01_STU\",\"courseID\":\"T01_CRS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "T02 Олон урьдач бүгд хангагдсан → 201 OK",
+      "item": [
+        {
+          "name": "Setup: PUT /students/T02_STU",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /students/T02_STU\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/students/T02_STU",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "students",
+                "T02_STU"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\":\"active\",\"coursesTaken\":[\"CS201\",\"CS202\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Setup: PUT /courses/T02_CRS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /courses/T02_CRS\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/courses/T02_CRS",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "courses",
+                "T02_CRS"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"prerequisites\":[\"CS201\",\"CS202\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"result = OK\", () => pm.expect(pm.response.json().result).to.eql(\"OK\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentID\":\"T02_STU\",\"courseID\":\"T02_CRS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "T03 Идэвхгүй оюутан бүртгүүлэхэд ERROR_INACTIVE_STUDENT",
+      "item": [
+        {
+          "name": "Setup: PUT /students/T03_STU",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /students/T03_STU\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/students/T03_STU",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "students",
+                "T03_STU"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\":\"inactive\",\"coursesTaken\":[\"CS201\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Setup: PUT /courses/T03_CRS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /courses/T03_CRS\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/courses/T03_CRS",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "courses",
+                "T03_CRS"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"prerequisites\":[\"CS201\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"result = ERROR_INACTIVE_STUDENT\", () => pm.expect(pm.response.json().result).to.eql(\"ERROR_INACTIVE_STUDENT\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentID\":\"T03_STU\",\"courseID\":\"T03_CRS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "T04 Байхгүй оюутан бүртгүүлэхэд ERROR_NO_STUDENT",
+      "item": [
+        {
+          "name": "Setup: PUT /courses/T04_CRS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /courses/T04_CRS\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/courses/T04_CRS",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "courses",
+                "T04_CRS"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"prerequisites\":[]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"result = ERROR_NO_STUDENT\", () => pm.expect(pm.response.json().result).to.eql(\"ERROR_NO_STUDENT\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentID\":\"T04_NOSUCH_STU\",\"courseID\":\"T04_CRS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "T05 Байхгүй хичээлд бүртгүүлэхэд ERROR_NO_COURSE",
+      "item": [
+        {
+          "name": "Setup: PUT /students/T05_STU",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /students/T05_STU\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/students/T05_STU",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "students",
+                "T05_STU"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\":\"active\",\"coursesTaken\":[\"CS201\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"result = ERROR_NO_COURSE\", () => pm.expect(pm.response.json().result).to.eql(\"ERROR_NO_COURSE\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentID\":\"T05_STU\",\"courseID\":\"T05_NOSUCH_CRS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "T06 Урьдач огт үзээгүй үед ERROR_PREREQUISITES, missing=[CS201]",
+      "item": [
+        {
+          "name": "Setup: PUT /students/T06_STU",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /students/T06_STU\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/students/T06_STU",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "students",
+                "T06_STU"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\":\"active\",\"coursesTaken\":[]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Setup: PUT /courses/T06_CRS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /courses/T06_CRS\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/courses/T06_CRS",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "courses",
+                "T06_CRS"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"prerequisites\":[\"CS201\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"result = ERROR_PREREQUISITES\", () => pm.expect(pm.response.json().result).to.eql(\"ERROR_PREREQUISITES\"));",
+                  "pm.test(\"missing = CS201\", () => pm.expect(pm.response.json().missing).to.eql([\"CS201\"]));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentID\":\"T06_STU\",\"courseID\":\"T06_CRS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "T07 Урьдач зарим нь дутуу үед missing зөвхөн дутууг жагсаана",
+      "item": [
+        {
+          "name": "Setup: PUT /students/T07_STU",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /students/T07_STU\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/students/T07_STU",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "students",
+                "T07_STU"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\":\"active\",\"coursesTaken\":[\"CS201\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Setup: PUT /courses/T07_CRS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /courses/T07_CRS\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/courses/T07_CRS",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "courses",
+                "T07_CRS"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"prerequisites\":[\"CS201\",\"CS202\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"result = ERROR_PREREQUISITES\", () => pm.expect(pm.response.json().result).to.eql(\"ERROR_PREREQUISITES\"));",
+                  "pm.test(\"missing = CS202\", () => pm.expect(pm.response.json().missing).to.eql([\"CS202\"]));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentID\":\"T07_STU\",\"courseID\":\"T07_CRS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "T08 Давхар алдаа: идэвхгүй оюутан + байхгүй хичээл → ERROR_INACTIVE_STUDENT",
+      "item": [
+        {
+          "name": "Setup: PUT /students/T08_STU",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /students/T08_STU\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/students/T08_STU",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "students",
+                "T08_STU"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\":\"inactive\",\"coursesTaken\":[]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"result = ERROR_INACTIVE_STUDENT\", () => pm.expect(pm.response.json().result).to.eql(\"ERROR_INACTIVE_STUDENT\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentID\":\"T08_STU\",\"courseID\":\"T08_NOSUCH_CRS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "T09 Давхар алдаа: байхгүй оюутан + байхгүй хичээл → ERROR_NO_STUDENT",
+      "item": [
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"result = ERROR_NO_STUDENT\", () => pm.expect(pm.response.json().result).to.eql(\"ERROR_NO_STUDENT\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentID\":\"T09_NOSUCH_STU\",\"courseID\":\"T09_NOSUCH_CRS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "T10 Давхар алдаа: идэвхгүй оюутан + урьдач дутуу → ERROR_INACTIVE_STUDENT",
+      "item": [
+        {
+          "name": "Setup: PUT /students/T10_STU",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /students/T10_STU\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/students/T10_STU",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "students",
+                "T10_STU"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\":\"inactive\",\"coursesTaken\":[]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Setup: PUT /courses/T10_CRS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /courses/T10_CRS\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/courses/T10_CRS",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "courses",
+                "T10_CRS"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"prerequisites\":[\"CS201\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"result = ERROR_INACTIVE_STUDENT\", () => pm.expect(pm.response.json().result).to.eql(\"ERROR_INACTIVE_STUDENT\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentID\":\"T10_STU\",\"courseID\":\"T10_CRS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "T11 Хязгаар: урьдачгүй хичээл + хоосон coursesTaken → 201 OK",
+      "item": [
+        {
+          "name": "Setup: PUT /students/T11_STU",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /students/T11_STU\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/students/T11_STU",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "students",
+                "T11_STU"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\":\"active\",\"coursesTaken\":[]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Setup: PUT /courses/T11_CRS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup OK: PUT /courses/T11_CRS\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/courses/T11_CRS",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "courses",
+                "T11_CRS"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"prerequisites\":[]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"result = OK\", () => pm.expect(pm.response.json().result).to.eql(\"OK\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentID\":\"T11_STU\",\"courseID\":\"T11_CRS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "T12 Хязгаар: courseID дутуу → 400 ERROR_BAD_REQUEST",
+      "item": [
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"result = ERROR_BAD_REQUEST\", () => pm.expect(pm.response.json().result).to.eql(\"ERROR_BAD_REQUEST\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentID\":\"T12_STU\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "T13 Хязгаар: studentID дутуу → 400 ERROR_BAD_REQUEST",
+      "item": [
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"result = ERROR_BAD_REQUEST\", () => pm.expect(pm.response.json().result).to.eql(\"ERROR_BAD_REQUEST\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"courseID\":\"T13_CRS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "T14 Хязгаар: буруу JSON → 400 ERROR_BAD_JSON",
+      "item": [
+        {
+          "name": "POST /registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Статус код 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"result = ERROR_BAD_JSON\", () => pm.expect(pm.response.json().result).to.eql(\"ERROR_BAD_JSON\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registrations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentID\": \"T14_STU\", ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

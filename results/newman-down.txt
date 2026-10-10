@@ -1,0 +1,606 @@
+(node:17585) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+newman
+
+Lab05 Registration API
+
+❏ T01 Happy path: идэвхтэй оюутан, урьдач хангасан → 201 OK
+↳ Setup: PUT /students/T01_STU
+  PUT http://localhost:3000/students/T01_STU [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+  2. Setup OK: PUT /students/T01_STU
+
+↳ Setup: PUT /courses/T01_CRS
+  PUT http://localhost:3000/courses/T01_CRS [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+  4. Setup OK: PUT /courses/T01_CRS
+
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+  6. Статус код 201
+  7. result = OK
+  8. registrationID нь тоо
+
+❏ T02 Олон урьдач бүгд хангагдсан → 201 OK
+↳ Setup: PUT /students/T02_STU
+  PUT http://localhost:3000/students/T02_STU [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 10. Setup OK: PUT /students/T02_STU
+
+↳ Setup: PUT /courses/T02_CRS
+  PUT http://localhost:3000/courses/T02_CRS [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 12. Setup OK: PUT /courses/T02_CRS
+
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 14. Статус код 201
+ 15. result = OK
+
+❏ T03 Идэвхгүй оюутан бүртгүүлэхэд ERROR_INACTIVE_STUDENT
+↳ Setup: PUT /students/T03_STU
+  PUT http://localhost:3000/students/T03_STU [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 17. Setup OK: PUT /students/T03_STU
+
+↳ Setup: PUT /courses/T03_CRS
+  PUT http://localhost:3000/courses/T03_CRS [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 19. Setup OK: PUT /courses/T03_CRS
+
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 21. Статус код 200
+ 22. result = ERROR_INACTIVE_STUDENT
+
+❏ T04 Байхгүй оюутан бүртгүүлэхэд ERROR_NO_STUDENT
+↳ Setup: PUT /courses/T04_CRS
+  PUT http://localhost:3000/courses/T04_CRS [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 24. Setup OK: PUT /courses/T04_CRS
+
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 26. Статус код 200
+ 27. result = ERROR_NO_STUDENT
+
+❏ T05 Байхгүй хичээлд бүртгүүлэхэд ERROR_NO_COURSE
+↳ Setup: PUT /students/T05_STU
+  PUT http://localhost:3000/students/T05_STU [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 29. Setup OK: PUT /students/T05_STU
+
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 31. Статус код 200
+ 32. result = ERROR_NO_COURSE
+
+❏ T06 Урьдач огт үзээгүй үед ERROR_PREREQUISITES, missing=[CS201]
+↳ Setup: PUT /students/T06_STU
+  PUT http://localhost:3000/students/T06_STU [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 34. Setup OK: PUT /students/T06_STU
+
+↳ Setup: PUT /courses/T06_CRS
+  PUT http://localhost:3000/courses/T06_CRS [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 36. Setup OK: PUT /courses/T06_CRS
+
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 38. Статус код 200
+ 39. result = ERROR_PREREQUISITES
+ 40. missing = CS201
+
+❏ T07 Урьдач зарим нь дутуу үед missing зөвхөн дутууг жагсаана
+↳ Setup: PUT /students/T07_STU
+  PUT http://localhost:3000/students/T07_STU [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 42. Setup OK: PUT /students/T07_STU
+
+↳ Setup: PUT /courses/T07_CRS
+  PUT http://localhost:3000/courses/T07_CRS [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 44. Setup OK: PUT /courses/T07_CRS
+
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 46. Статус код 200
+ 47. result = ERROR_PREREQUISITES
+ 48. missing = CS202
+
+❏ T08 Давхар алдаа: идэвхгүй оюутан + байхгүй хичээл → ERROR_INACTIVE_STUDENT
+↳ Setup: PUT /students/T08_STU
+  PUT http://localhost:3000/students/T08_STU [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 50. Setup OK: PUT /students/T08_STU
+
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 52. Статус код 200
+ 53. result = ERROR_INACTIVE_STUDENT
+
+❏ T09 Давхар алдаа: байхгүй оюутан + байхгүй хичээл → ERROR_NO_STUDENT
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 55. Статус код 200
+ 56. result = ERROR_NO_STUDENT
+
+❏ T10 Давхар алдаа: идэвхгүй оюутан + урьдач дутуу → ERROR_INACTIVE_STUDENT
+↳ Setup: PUT /students/T10_STU
+  PUT http://localhost:3000/students/T10_STU [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 58. Setup OK: PUT /students/T10_STU
+
+↳ Setup: PUT /courses/T10_CRS
+  PUT http://localhost:3000/courses/T10_CRS [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 60. Setup OK: PUT /courses/T10_CRS
+
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 62. Статус код 200
+ 63. result = ERROR_INACTIVE_STUDENT
+
+❏ T11 Хязгаар: урьдачгүй хичээл + хоосон coursesTaken → 201 OK
+↳ Setup: PUT /students/T11_STU
+  PUT http://localhost:3000/students/T11_STU [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 65. Setup OK: PUT /students/T11_STU
+
+↳ Setup: PUT /courses/T11_CRS
+  PUT http://localhost:3000/courses/T11_CRS [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 67. Setup OK: PUT /courses/T11_CRS
+
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 69. Статус код 201
+ 70. result = OK
+
+❏ T12 Хязгаар: courseID дутуу → 400 ERROR_BAD_REQUEST
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 72. Статус код 400
+ 73. result = ERROR_BAD_REQUEST
+
+❏ T13 Хязгаар: studentID дутуу → 400 ERROR_BAD_REQUEST
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 75. Статус код 400
+ 76. result = ERROR_BAD_REQUEST
+
+❏ T14 Хязгаар: буруу JSON → 400 ERROR_BAD_JSON
+↳ POST /registrations
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 78. Статус код 400
+ 79. result = ERROR_BAD_JSON
+
+┌─────────────────────────┬──────────┬──────────┐
+│                         │ executed │   failed │
+├─────────────────────────┼──────────┼──────────┤
+│              iterations │        1 │        0 │
+├─────────────────────────┼──────────┼──────────┤
+│                requests │       31 │       31 │
+├─────────────────────────┼──────────┼──────────┤
+│            test-scripts │       31 │        0 │
+├─────────────────────────┼──────────┼──────────┤
+│      prerequest-scripts │        0 │        0 │
+├─────────────────────────┼──────────┼──────────┤
+│              assertions │       48 │       48 │
+├─────────────────────────┴──────────┴──────────┤
+│ total run duration: 790ms                     │
+├───────────────────────────────────────────────┤
+│ total data received: 0B (approx)              │
+└───────────────────────────────────────────────┘
+
+   #  failure         detail                                                                                                              
+                                                                                                                                          
+ 01.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 02.  AssertionError  Setup OK: PUT /students/T01_STU                                                                                     
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T01 Happy path: идэвхтэй оюутан, урьдач хангасан → 201 OK / Setup: PUT /students/T01_STU"                   
+                                                                                                                                          
+ 03.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 04.  AssertionError  Setup OK: PUT /courses/T01_CRS                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T01 Happy path: идэвхтэй оюутан, урьдач хангасан → 201 OK / Setup: PUT /courses/T01_CRS"                    
+                                                                                                                                          
+ 05.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 06.  AssertionError  Статус код 201                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T01 Happy path: идэвхтэй оюутан, урьдач хангасан → 201 OK / POST /registrations"                            
+                                                                                                                                          
+ 07.  JSONError       result = OK                                                                                                         
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T01 Happy path: идэвхтэй оюутан, урьдач хангасан → 201 OK / POST /registrations"                            
+                                                                                                                                          
+ 08.  JSONError       registrationID нь тоо                                                                                               
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:2 in test-script                                                                                       
+                      inside "T01 Happy path: идэвхтэй оюутан, урьдач хангасан → 201 OK / POST /registrations"                            
+                                                                                                                                          
+ 09.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 10.  AssertionError  Setup OK: PUT /students/T02_STU                                                                                     
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T02 Олон урьдач бүгд хангагдсан → 201 OK / Setup: PUT /students/T02_STU"                                    
+                                                                                                                                          
+ 11.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 12.  AssertionError  Setup OK: PUT /courses/T02_CRS                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T02 Олон урьдач бүгд хангагдсан → 201 OK / Setup: PUT /courses/T02_CRS"                                     
+                                                                                                                                          
+ 13.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 14.  AssertionError  Статус код 201                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T02 Олон урьдач бүгд хангагдсан → 201 OK / POST /registrations"                                             
+                                                                                                                                          
+ 15.  JSONError       result = OK                                                                                                         
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T02 Олон урьдач бүгд хангагдсан → 201 OK / POST /registrations"                                             
+                                                                                                                                          
+ 16.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 17.  AssertionError  Setup OK: PUT /students/T03_STU                                                                                     
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T03 Идэвхгүй оюутан бүртгүүлэхэд ERROR_INACTIVE_STUDENT / Setup: PUT /students/T03_STU"                     
+                                                                                                                                          
+ 18.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 19.  AssertionError  Setup OK: PUT /courses/T03_CRS                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T03 Идэвхгүй оюутан бүртгүүлэхэд ERROR_INACTIVE_STUDENT / Setup: PUT /courses/T03_CRS"                      
+                                                                                                                                          
+ 20.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 21.  AssertionError  Статус код 200                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T03 Идэвхгүй оюутан бүртгүүлэхэд ERROR_INACTIVE_STUDENT / POST /registrations"                              
+                                                                                                                                          
+ 22.  JSONError       result = ERROR_INACTIVE_STUDENT                                                                                     
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T03 Идэвхгүй оюутан бүртгүүлэхэд ERROR_INACTIVE_STUDENT / POST /registrations"                              
+                                                                                                                                          
+ 23.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 24.  AssertionError  Setup OK: PUT /courses/T04_CRS                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T04 Байхгүй оюутан бүртгүүлэхэд ERROR_NO_STUDENT / Setup: PUT /courses/T04_CRS"                             
+                                                                                                                                          
+ 25.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 26.  AssertionError  Статус код 200                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T04 Байхгүй оюутан бүртгүүлэхэд ERROR_NO_STUDENT / POST /registrations"                                     
+                                                                                                                                          
+ 27.  JSONError       result = ERROR_NO_STUDENT                                                                                           
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T04 Байхгүй оюутан бүртгүүлэхэд ERROR_NO_STUDENT / POST /registrations"                                     
+                                                                                                                                          
+ 28.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 29.  AssertionError  Setup OK: PUT /students/T05_STU                                                                                     
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T05 Байхгүй хичээлд бүртгүүлэхэд ERROR_NO_COURSE / Setup: PUT /students/T05_STU"                            
+                                                                                                                                          
+ 30.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 31.  AssertionError  Статус код 200                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T05 Байхгүй хичээлд бүртгүүлэхэд ERROR_NO_COURSE / POST /registrations"                                     
+                                                                                                                                          
+ 32.  JSONError       result = ERROR_NO_COURSE                                                                                            
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T05 Байхгүй хичээлд бүртгүүлэхэд ERROR_NO_COURSE / POST /registrations"                                     
+                                                                                                                                          
+ 33.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 34.  AssertionError  Setup OK: PUT /students/T06_STU                                                                                     
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T06 Урьдач огт үзээгүй үед ERROR_PREREQUISITES, missing=[CS201] / Setup: PUT /students/T06_STU"             
+                                                                                                                                          
+ 35.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 36.  AssertionError  Setup OK: PUT /courses/T06_CRS                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T06 Урьдач огт үзээгүй үед ERROR_PREREQUISITES, missing=[CS201] / Setup: PUT /courses/T06_CRS"              
+                                                                                                                                          
+ 37.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 38.  AssertionError  Статус код 200                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T06 Урьдач огт үзээгүй үед ERROR_PREREQUISITES, missing=[CS201] / POST /registrations"                      
+                                                                                                                                          
+ 39.  JSONError       result = ERROR_PREREQUISITES                                                                                        
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T06 Урьдач огт үзээгүй үед ERROR_PREREQUISITES, missing=[CS201] / POST /registrations"                      
+                                                                                                                                          
+ 40.  JSONError       missing = CS201                                                                                                     
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:2 in test-script                                                                                       
+                      inside "T06 Урьдач огт үзээгүй үед ERROR_PREREQUISITES, missing=[CS201] / POST /registrations"                      
+                                                                                                                                          
+ 41.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 42.  AssertionError  Setup OK: PUT /students/T07_STU                                                                                     
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T07 Урьдач зарим нь дутуу үед missing зөвхөн дутууг жагсаана / Setup: PUT /students/T07_STU"                
+                                                                                                                                          
+ 43.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 44.  AssertionError  Setup OK: PUT /courses/T07_CRS                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T07 Урьдач зарим нь дутуу үед missing зөвхөн дутууг жагсаана / Setup: PUT /courses/T07_CRS"                 
+                                                                                                                                          
+ 45.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 46.  AssertionError  Статус код 200                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T07 Урьдач зарим нь дутуу үед missing зөвхөн дутууг жагсаана / POST /registrations"                         
+                                                                                                                                          
+ 47.  JSONError       result = ERROR_PREREQUISITES                                                                                        
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T07 Урьдач зарим нь дутуу үед missing зөвхөн дутууг жагсаана / POST /registrations"                         
+                                                                                                                                          
+ 48.  JSONError       missing = CS202                                                                                                     
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:2 in test-script                                                                                       
+                      inside "T07 Урьдач зарим нь дутуу үед missing зөвхөн дутууг жагсаана / POST /registrations"                         
+                                                                                                                                          
+ 49.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 50.  AssertionError  Setup OK: PUT /students/T08_STU                                                                                     
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T08 Давхар алдаа: идэвхгүй оюутан + байхгүй хичээл → ERROR_INACTIVE_STUDENT / Setup: PUT /students/T08_STU" 
+                                                                                                                                          
+ 51.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 52.  AssertionError  Статус код 200                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T08 Давхар алдаа: идэвхгүй оюутан + байхгүй хичээл → ERROR_INACTIVE_STUDENT / POST /registrations"          
+                                                                                                                                          
+ 53.  JSONError       result = ERROR_INACTIVE_STUDENT                                                                                     
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T08 Давхар алдаа: идэвхгүй оюутан + байхгүй хичээл → ERROR_INACTIVE_STUDENT / POST /registrations"          
+                                                                                                                                          
+ 54.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 55.  AssertionError  Статус код 200                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T09 Давхар алдаа: байхгүй оюутан + байхгүй хичээл → ERROR_NO_STUDENT / POST /registrations"                 
+                                                                                                                                          
+ 56.  JSONError       result = ERROR_NO_STUDENT                                                                                           
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T09 Давхар алдаа: байхгүй оюутан + байхгүй хичээл → ERROR_NO_STUDENT / POST /registrations"                 
+                                                                                                                                          
+ 57.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 58.  AssertionError  Setup OK: PUT /students/T10_STU                                                                                     
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T10 Давхар алдаа: идэвхгүй оюутан + урьдач дутуу → ERROR_INACTIVE_STUDENT / Setup: PUT /students/T10_STU"   
+                                                                                                                                          
+ 59.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 60.  AssertionError  Setup OK: PUT /courses/T10_CRS                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T10 Давхар алдаа: идэвхгүй оюутан + урьдач дутуу → ERROR_INACTIVE_STUDENT / Setup: PUT /courses/T10_CRS"    
+                                                                                                                                          
+ 61.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 62.  AssertionError  Статус код 200                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T10 Давхар алдаа: идэвхгүй оюутан + урьдач дутуу → ERROR_INACTIVE_STUDENT / POST /registrations"            
+                                                                                                                                          
+ 63.  JSONError       result = ERROR_INACTIVE_STUDENT                                                                                     
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T10 Давхар алдаа: идэвхгүй оюутан + урьдач дутуу → ERROR_INACTIVE_STUDENT / POST /registrations"            
+                                                                                                                                          
+ 64.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 65.  AssertionError  Setup OK: PUT /students/T11_STU                                                                                     
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T11 Хязгаар: урьдачгүй хичээл + хоосон coursesTaken → 201 OK / Setup: PUT /students/T11_STU"                
+                                                                                                                                          
+ 66.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 67.  AssertionError  Setup OK: PUT /courses/T11_CRS                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T11 Хязгаар: урьдачгүй хичээл + хоосон coursesTaken → 201 OK / Setup: PUT /courses/T11_CRS"                 
+                                                                                                                                          
+ 68.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 69.  AssertionError  Статус код 201                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T11 Хязгаар: урьдачгүй хичээл + хоосон coursesTaken → 201 OK / POST /registrations"                         
+                                                                                                                                          
+ 70.  JSONError       result = OK                                                                                                         
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T11 Хязгаар: урьдачгүй хичээл + хоосон coursesTaken → 201 OK / POST /registrations"                         
+                                                                                                                                          
+ 71.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 72.  AssertionError  Статус код 400                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T12 Хязгаар: courseID дутуу → 400 ERROR_BAD_REQUEST / POST /registrations"                                  
+                                                                                                                                          
+ 73.  JSONError       result = ERROR_BAD_REQUEST                                                                                          
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T12 Хязгаар: courseID дутуу → 400 ERROR_BAD_REQUEST / POST /registrations"                                  
+                                                                                                                                          
+ 74.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 75.  AssertionError  Статус код 400                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T13 Хязгаар: studentID дутуу → 400 ERROR_BAD_REQUEST / POST /registrations"                                 
+                                                                                                                                          
+ 76.  JSONError       result = ERROR_BAD_REQUEST                                                                                          
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T13 Хязгаар: studentID дутуу → 400 ERROR_BAD_REQUEST / POST /registrations"                                 
+                                                                                                                                          
+ 77.  Error                                                                                                                               
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                                 
+                      at request                                                                                                          
+                      inside ""                                                                                                           
+                                                                                                                                          
+ 78.  AssertionError  Статус код 400                                                                                                      
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                            
+                      at assertion:0 in test-script                                                                                       
+                      inside "T14 Хязгаар: буруу JSON → 400 ERROR_BAD_JSON / POST /registrations"                                         
+                                                                                                                                          
+ 79.  JSONError       result = ERROR_BAD_JSON                                                                                             
+                      "undefined" is not valid JSON                                                                                       
+                      at assertion:1 in test-script                                                                                       
+                      inside "T14 Хязгаар: буруу JSON → 400 ERROR_BAD_JSON / POST /registrations"                                         
